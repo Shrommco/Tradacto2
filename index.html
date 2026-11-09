@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tradacto | Trans-Continental Infrastructure & Supply Chain Advisory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-pure: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent-navy: #1e293b;
+            --border-strict: #cbd5e1;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-pure); color: var(--text-main); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--text-main); letter-spacing: -0.02em; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        
+        header { border-bottom: 2px solid var(--text-main); padding: 2rem 0; margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: flex-end; }
+        .logo { font-size: 2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-main); text-decoration: none; cursor: pointer; }
+        nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        nav a { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; text-decoration: none; color: var(--text-muted); letter-spacing: 0.05em; transition: color 0.2s; cursor: pointer; }
+        nav a:hover, nav a.active { color: var(--text-main); }
+        .hq-location { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; }
+
+        .page { display: none; }
+        .page.active-page { display: block; }
+
+        .hero { margin-bottom: 6rem; }
+        .hero h1 { font-size: clamp(2.8rem, 5vw, 4.8rem); line-height: 1.1; margin-bottom: 2rem; max-width: 1050px; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 750px; border-left: 3px solid var(--accent-navy); padding-left: 1.5rem; margin-bottom: 3rem; }
+        .btn-institutional { display: inline-block; background-color: var(--text-main); color: #ffffff; padding: 1rem 2rem; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; transition: background 0.2s; cursor: pointer; border: none; }
+        .btn-institutional:hover { background-color: var(--accent-navy); }
+
+        .pillars-section, .content-section { border-top: 1px solid var(--border-strict); padding-top: 4rem; margin-bottom: 6rem; }
+        .section-label { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 3rem; display: block; }
+        .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); border-top: 1px solid var(--border-strict); border-left: 1px solid var(--border-strict); }
+        .pillar { padding: 3rem 2rem; border-right: 1px solid var(--border-strict); border-bottom: 1px solid var(--border-strict); background: #fff; transition: background 0.2s; }
+        .pillar:hover { background-color: #f8fafc; }
+        .pillar-number { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--border-strict); margin-bottom: 1.5rem; display: block; }
+        .pillar h3 { font-size: 1.3rem; margin-bottom: 1rem; text-transform: uppercase; font-weight: 700; }
+        .pillar p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .text-link { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; text-decoration: none; color: var(--text-main); letter-spacing: 0.05em; cursor: pointer; }
+        .text-link:hover { text-decoration: underline; }
+
+        .page-header { margin-bottom: 5rem; max-width: 950px; }
+        .page-header h1 { font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 1.5rem; }
+        .page-header p { font-size: 1.2rem; color: var(--text-muted); border-left: 3px solid var(--accent-navy); padding-left: 1.5rem; }
+
+        .service-block { border-top: 1px solid var(--border-strict); padding: 4rem 0; display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
+        .service-meta span { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.1em; display: block; margin-bottom: 1rem; }
+        .service-meta h2 { font-size: 2rem; }
+        .service-content p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .spec-list { list-style: none; margin-top: 2rem; border-top: 1px solid var(--border-strict); }
+        .spec-list li { padding: 1rem 0; border-bottom: 1px solid var(--border-strict); font-size: 0.95rem; font-weight: 500; display: flex; justify-content: space-between; }
+        .spec-list li span { color: var(--text-muted); font-weight: 400; }
+
+        .grid-sectors, .governance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-bottom: 6rem; }
+        .sector-card, .gov-card { border-top: 2px solid var(--text-main); padding-top: 2rem; }
+        .sector-card h3, .gov-card h3 { font-size: 1.4rem; margin-bottom: 1rem; text-transform: uppercase; }
+        .sector-card p, .gov-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .article-container { max-width: 850px; margin: 0 auto 6rem auto; }
+        .article-container h2 { font-size: 2rem; margin: 2.5rem 0 1rem 0; }
+        .article-container p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .article-container blockquote { border-left: 3px solid var(--text-main); padding-left: 1.5rem; margin: 2rem 0; font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--text-main); }
+
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-bottom: 6rem; }
+        .contact-info h1 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 1.5rem; }
+        .contact-info p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; }
+        .direct-email { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--text-main); text-decoration: none; border-bottom: 2px solid var(--text-main); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 3rem; }
+        .office-list { border-top: 1px solid var(--border-strict); }
+        .office { padding: 1.5rem 0; border-bottom: 1px solid var(--border-strict); display: flex; justify-content: space-between; font-size: 0.95rem; }
+        .office span:last-child { color: var(--text-muted); }
+        .notice-box { background-color: #f8fafc; border: 1px solid var(--border-strict); padding: 2.5rem; }
+        .notice-box h3 { font-size: 1.3rem; margin-bottom: 1rem; text-transform: uppercase; }
+        .notice-box p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+        footer { background-color: var(--accent-navy); color: #f1f5f9; padding: 5rem 0; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; border-bottom: 1px solid #475569; padding-bottom: 3rem; margin-bottom: 3rem; }
+        .footer-col h4 { color: #ffffff; font-size: 1.2rem; margin-bottom: 1.5rem; letter-spacing: 0.05em; }
+        .footer-col p, .footer-col a { color: #94a3b8; font-size: 0.9rem; text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .legal { font-size: 0.8rem; color: #64748b; display: flex; justify-content: space-between; }
+
+        @media(max-width: 900px) { header { flex-direction: column; align-items: flex-start; gap: 1rem; } .service-block, .contact-grid { grid-template-columns: 1fr; gap: 3rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a class="logo" onclick="switchPage('home')">Tradacto</a>
+            <nav>
+                <a id="nav-home" class="active" onclick="switchPage('home')">Home</a>
+                <a id="nav-services" onclick="switchPage('services')">Services</a>
+                <a id="nav-expertise" onclick="switchPage('expertise')">Expertise</a>
+                <a id="nav-perspectives" onclick="switchPage('perspectives')">Perspectives</a>
+                <a id="nav-governance" onclick="switchPage('governance')">Governance</a>
+                <a id="nav-contact" onclick="switchPage('contact')">Contact</a>
+            </nav>
+            <span class="hq-location">Gothenburg | Mumbai | Houston</span>
+        </header>
+
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page active-page">
+            <section class="hero">
+                <h1>Bridging Global Heavy Electrical Bottlenecks for Institutional Infrastructure.</h1>
+                <p>Tradacto provides elite risk advisory, rigorous European engineering auditing, and heavy-lift logistics coordination for U.S. digital infrastructure and energy transition CapEx programs.</p>
+                <button class="btn-institutional" onclick="switchPage('contact')">Initiate Institutional Engagement</button>
+            </section>
+
+            <section class="pillars-section">
+                <span class="section-label">Core Advisory Mandates</span>
+                <div class="pillars-grid">
+                    <div class="pillar">
+                        <span class="pillar-number">01</span>
+                        <h3>Technical Compliance & FAT Auditing</h3>
+                        <p>Independent, on-site Factory Acceptance Testing (FAT) and IEEE/ANSI standards verification across unallocated Tier-2 manufacturing foundries.</p>
+                        <a class="text-link" onclick="switchPage('services')">Review Audit Protocol &rarr;</a>
+                    </div>
+                    <div class="pillar">
+                        <span class="pillar-number">02</span>
+                        <h3>Heavy-Lift Project Cargo Logistics</h3>
+                        <p>Proprietary port-to-pad route engineering, geared vessel chartering, and comprehensive marine risk underwriting for ultra-heavy electrical assets.</p>
+                        <a class="text-link" onclick="switchPage('services')">Review Logistics Framework &rarr;</a>
+                    </div>
+                    <div class="pillar">
+                        <span class="pillar-number">03</span>
+                        <h3>Trade Finance & Structured Execution</h3>
+                        <p>UCP 600 compliant documentary credit architecture ensuring absolute counterparty risk mitigation and milestone-tied capital protection.</p>
+                        <a class="text-link" onclick="switchPage('services')">Review Trade Architecture &rarr;</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SERVICES PAGE -->
+        <div id="page-services" class="page">
+            <div class="page-header">
+                <h1>Comprehensive Infrastructure Advisory & Execution.</h1>
+                <p>Mitigating structural capacity bottlenecks through rigorous technical oversight, advanced logistics engineering, and secure financial instruments.</p>
+            </div>
+
+            <div class="service-block" id="audit">
+                <div class="service-meta">
+                    <span>Core Mandate 01</span>
+                    <h2>Technical Auditing & FAT Protocols</h2>
+                </div>
+                <div class="service-content">
+                    <p>U.S. utility-scale data center developers and LNG EPCs face rigid Approved Vendor List (AVL) constraints, yet Tier-1 domestic manufacturers are booked through 2029. We bridge this gap by qualifying and auditing unallocated Tier-2 manufacturing foundries across Asia.</p>
+                    <p>Our independent European engineering teams oversee end-to-end Factory Acceptance Testing (FAT), verifying raw material integrity, core stacking tolerances, and dielectric performance against rigorous western standards.</p>
+                    <ul class="spec-list">
+                        <li>Compliance Standard <span>IEEE C57.12.00 / ANSI / UL</span></li>
+                        <li>Audit Oversight <span>Independent Swedish Engineering Verification</span></li>
+                        <li>Deliverable <span>Auditor-Ready Due Diligence Dossier</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-block" id="marine">
+                <div class="service-meta">
+                    <span>Core Mandate 02</span>
+                    <h2>Heavy-Lift Project Cargo & Logistics</h2>
+                </div>
+                <div class="service-content">
+                    <p>Transporting 200-to-400-ton Large Power Transformers (LPTs) from inland manufacturing foundries to coastal offload points and inland substation pads requires absolute logistical precision.</p>
+                    <p>Commanded by master maritime veterans with decades of heavy-lift project cargo experience, we engineer custom multimodal transport plans, manage geared vessel charters, and insulate shipments under comprehensive marine insurance frameworks.</p>
+                    <ul class="spec-list">
+                        <li>Route Engineering <span>Origin-to-Pad Multimodal Survey</span></li>
+                        <li>Vessel Operations <span>Heavy-Lift & Project Carrier Chartering</span></li>
+                        <li>Risk Management <span>All-Risks Marine Hull & Transit Underwriting</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-block" id="finance">
+                <div class="service-meta">
+                    <span>Core Mandate 03</span>
+                    <h2>Trade Finance & Risk Structuring</h2>
+                </div>
+                <div class="service-content">
+                    <p>Cross-border procurement of heavy electrical equipment entails complex financial exposure. Tradacto structures secure trade finance vehicles that protect client capital while ensuring strict adherence to international banking standards.</p>
+                    <p>By implementing back-to-back, UCP 600 compliant documentary letters of credit, funds are released solely upon presentation of verified milestone certificates and clean bills of lading.</p>
+                    <ul class="spec-list">
+                        <li>Financial Instrument <span>UCP 600 Compliant Documentary LCs</span></li>
+                        <li>Liability Control <span>Ring-Fenced Corporate Special Purpose Vehicles</span></li>
+                        <li>Execution Model <span>Milestone-Tied Capital Disbursement</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPERTISE PAGE -->
+        <div id="page-expertise" class="page">
+            <div class="page-header">
+                <h1>Target Sectors & Critical Infrastructure.</h1>
+                <p>Solving supply chain bottlenecks where capital deployment speed dictates asset yield and regulatory compliance.</p>
+            </div>
+
+            <div class="grid-sectors">
+                <div class="sector-card">
+                    <h3>Hyperscale AI Data Centers</h3>
+                    <p>Addressing the acute electrical grid interconnection crisis for multi-megawatt AI data center campuses by securing dedicated substation transformer allocations outside congested Tier-1 domestic queues.</p>
+                </div>
+                <div class="sector-card">
+                    <h3>LNG Export Terminals</h3>
+                    <p>Supporting Gulf Coast liquefied natural gas expansion projects requiring heavy-duty electrical distribution infrastructure to maintain operational milestones and avoid costly project delays.</p>
+                </div>
+                <div class="sector-card">
+                    <h3>Utility-Scale Renewables & BESS</h3>
+                    <p>Assisting independent power producers and solar/wind developers in securing Generator Step-Up (GSU) transformers to safeguard Commercial Operation Dates (COD) and federal tax credit eligibility.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PERSPECTIVES / INSIGHTS PAGE -->
+        <div id="page-perspectives" class="page">
+            <div class="page-header">
+                <h1>Institutional Perspectives.</h1>
+                <p>Rigorous analysis on global heavy electrical capacity, supply chain security, and sovereign advisory frameworks.</p>
+            </div>
+
+            <div class="article-container">
+                <h2>Discretion as Defense: Protecting CapEx Pipelines in an Age of Supply Scarcity</h2>
+                <p><strong>Published by Tradacto Research & Risk Desk</strong></p>
+                
+                <p>The North American bulk-power system is facing an unprecedented structural bottleneck. With Tier-1 OEM order books for Large Power Transformers (LPTs) and Generator Step-Up (GSU) units extended up to 48 to 60 months, data center developers and utility-scale renewable IPPs are caught in a destructive paradox: capital is fully deployed, site permits are secured, yet projects remain stalled awaiting basic electrical hardware.</p>
+
+                <blockquote>"In high-stakes infrastructure arbitrage, open-source transparency is vulnerability. We maintain strict operational discretion to protect our foundry allocations from market interference."</blockquote>
+
+                <h2>The Tier-2 Arbitrage and the Trust Deficit</h2>
+                <p>While certified manufacturing capacity exists across unallocated Tier-2 foundries in Asia, U.S. risk committees cannot deploy capital there blindly. Without rigorous, independent technical oversight, imported units risk failing IEEE/ANSI compliance, dielectric stress tests, or local utility interconnection standards. The barrier is not manufacturing capability; it is third-party audit validation.</p>
+
+                <h2>Why Tradacto Operates Under a Sovereign Privacy Mandate</h2>
+                <p>A common inquiry from institutional risk desks is why Tradacto does not maintain a sprawling public social media footprint or broadcast executive rosters on public networks. In the global heavy electrical market, transparency is weaponized by competitors to intercept unallocated foundry production slots or compromise supply corridors.</p>
+                <p>Tradacto operates as a sovereign, closed-loop advisory engine. Our value is measured entirely by whether heavy electrical assets arrive securely on U.S. foundations on schedule—not by digital marketing noise. We maintain strict operational discretion to safeguard our clients' capital deployment timelines.</p>
+            </div>
+        </div>
+
+        <!-- GOVERNANCE PAGE -->
+        <div id="page-governance" class="page">
+            <div class="page-header">
+                <h1>Auditor-Ready Rigor & Liability Isolation.</h1>
+                <p>Engineered to withstand rigorous examination by Big Four accounting firms, corporate risk compliance desks, and institutional investment committees.</p>
+            </div>
+
+            <div class="governance-grid">
+                <div class="gov-card">
+                    <h3>Swedish Corporate Jurisdiction</h3>
+                    <p>Headquartered in Sweden, Tradacto operates within one of the world's most stable and transparent business environments, providing international clients with rigorous legal clarity and regulatory confidence.</p>
+                </div>
+                <div class="gov-card">
+                    <h3>Strict Liability Firewalls</h3>
+                    <p>Our engagement structures cleanly separate advisory due diligence (Phase 1) from physical equipment delivery (Phase 2), protecting client balance sheets and ring-fencing operational liabilities.</p>
+                </div>
+                <div class="gov-card">
+                    <h3>International Trade Standards</h3>
+                    <p>All transactional and financial mechanisms adhere strictly to established global trade frameworks, ensuring full transparency, anti-corruption compliance, and secure documentation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="page-contact" class="page">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h1>Direct Institutional Engagement.</h1>
+                    <p>Tradacto engages exclusively with infrastructure private equity funds, hyperscale data center developers, and major EPC procurement leadership.</p>
+                    <a href="mailto:hari@tradacto.com" class="direct-email">hari@tradacto.com</a>
+
+                    <div class="office-list">
+                        <div class="office">
+                            <span>European Headquarters</span>
+                            <span>Gothenburg, Sweden</span>
+                        </div>
+                        <div class="office">
+                            <span>Maritime & Logistics Command</span>
+                            <span>Mumbai, India</span>
+                        </div>
+                        <div class="office">
+                            <span>U.S. Infrastructure Interface</span>
+                            <span>Houston, Texas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <h3>Mandatory Onboarding Protocol</h3>
+                    <p>To protect intellectual property and comply with international trade governance, all communications regarding heavy electrical foundry allocations must originate from corporate email domains representing qualified entities.</p>
+                    <p>Retail, unsolicited vendor, or recruitment inquiries are automatically filtered and not processed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Institutional Inquiries</h4>
+                    <a href="mailto:hari@tradacto.com">hari@tradacto.com</a>
+                    <p>Engagements restricted to Private Equity investment committees, EPC procurement leadership, and institutional risk desks.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Corporate Jurisdiction</h4>
+                    <p>Tradacto is structured and operated under Swedish corporate law, ensuring uncompromised transparency, anti-corruption compliance, and international trade governance.</p>
+                </div>
+            </div>
+            <div class="legal">
+                <span>&copy; 2026 Tradacto AB. All Rights Reserved.</span>
+                <span>Gothenburg, Västra Götaland County, Sweden.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function switchPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active-page'));
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(l => l.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active-page');
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) activeNav.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
